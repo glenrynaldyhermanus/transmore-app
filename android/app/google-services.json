@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "815771276633",
+    "project_id": "transmore-967bc",
+    "storage_bucket": "transmore-967bc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:815771276633:android:49b119bdefbfa922bde848",
+        "android_client_info": {
+          "package_name": "com.transmore.admin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_AKD80l-OyUwZSuVH48t4rLEN6GyRb80"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:815771276633:android:38ac68c863211799bde848",
+        "android_client_info": {
+          "package_name": "com.transmore.courier"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_AKD80l-OyUwZSuVH48t4rLEN6GyRb80"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
