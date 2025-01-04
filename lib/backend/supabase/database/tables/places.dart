@@ -49,4 +49,19 @@ class PlacesRow extends SupabaseDataRow {
 
   String? get location => getField<String>('location');
   set location(String? value) => setField<String>('location', value);
+
+  String? get regionCode => getField<String>('region_code');
+  set regionCode(String? value) => setField<String>('region_code', value);
+
+  String? get city => getField<String>('city');
+  set city(String? value) => setField<String>('city', value);
+
+  String? get referenceType => getField<String>('reference_type');
+  set referenceType(String? value) => setField<String>('reference_type', value);
+
+  String? get referenceId => getField<String>('reference_id');
+  set referenceId(String? value) => setField<String>('reference_id', value);
+
+  String? get contactPerson => getField<String>('contact_person');
+  set contactPerson(String? value) => setField<String>('contact_person', value);
 }

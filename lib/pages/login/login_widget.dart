@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -43,7 +44,10 @@ class _LoginWidgetState extends State<LoginWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -266,6 +270,16 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 shouldSetState = true;
                                 if (_model.workerUsers != null &&
                                     (_model.workerUsers)!.isNotEmpty) {
+                                  FFAppState().authUser = AuthUserStruct(
+                                    id: _model.workerUsers?.firstOrNull?.id,
+                                    uid: currentUserUid,
+                                    name: _model.workerUsers?.firstOrNull?.name,
+                                    email:
+                                        _model.workerUsers?.firstOrNull?.email,
+                                    phone:
+                                        _model.workerUsers?.firstOrNull?.phone,
+                                  );
+
                                   context.pushNamedAuth(
                                       'Home', context.mounted);
 

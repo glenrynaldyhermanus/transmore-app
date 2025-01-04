@@ -52,4 +52,7 @@ class FormFieldsRow extends SupabaseDataRow {
 
   String get formId => getField<String>('form_id')!;
   set formId(String value) => setField<String>('form_id', value);
+
+  bool get isQcField => getField<bool>('is_qc_field')!;
+  set isQcField(bool value) => setField<bool>('is_qc_field', value);
 }

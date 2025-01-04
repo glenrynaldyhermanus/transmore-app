@@ -71,7 +71,10 @@ class _FormWidgetState extends State<FormWidget> {
         final formResultsRecord = snapshot.data!;
 
         return GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () {
+            FocusScope.of(context).unfocus();
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -316,58 +319,11 @@ class _FormWidgetState extends State<FormWidget> {
                   ),
                   FFButtonWidget(
                     onPressed: () async {
-                      _model.sbResults = await ResultsTable().queryRows(
-                        queryFn: (q) => q.eqOrNull(
-                          'id',
-                          formResultsRecord.resultId,
-                        ),
-                      );
-                      if (_model.sbResults != null &&
-                          (_model.sbResults)!.isNotEmpty) {
-                        // Update Result Status
-                        await ResultsTable().update(
-                          data: {
-                            'status': 3,
-                            'updated_at':
-                                supaSerialize<DateTime>(getCurrentTimestamp),
-                            'updated_by':
-                                '413db131-b608-425a-bed9-7fe2b8bdae71',
-                          },
-                          matchingRows: (rows) => rows.eqOrNull(
-                            'id',
-                            formResultsRecord.resultId,
-                          ),
-                        );
-                      } else {
-                        // Create Result
-                        await ResultsTable().insert({
-                          'status': 3,
-                          'id': formResultsRecord.resultId,
-                          'task_id': widget.task?.id,
-                          'created_at':
-                              supaSerialize<DateTime>(getCurrentTimestamp),
-                          'created_by': '413db131-b608-425a-bed9-7fe2b8bdae71',
-                          'worker_id': formResultsRecord.workerId,
-                        });
-                      }
-
-                      await TasksTable().update(
-                        data: {
-                          'status': 4,
-                        },
-                        matchingRows: (rows) => rows.eqOrNull(
-                          'id',
-                          widget.task?.id,
-                        ),
-                      );
-
                       await widget.resultRef!.update(createResultsRecordData(
                         status: 'Done',
                         statusKey: 3,
                       ));
                       context.safePop();
-
-                      safeSetState(() {});
                     },
                     text: 'Save',
                     options: FFButtonOptions(

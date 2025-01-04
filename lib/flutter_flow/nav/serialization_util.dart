@@ -264,6 +264,8 @@ dynamic deserializeParam<T>(
             return ItemsViewRow(data);
           case ClientsViewRow:
             return ClientsViewRow(data);
+          case TagsViewRow:
+            return TagsViewRow(data);
           case ResultValuesRow:
             return ResultValuesRow(data);
           case ItemFormsRow:
@@ -302,18 +304,26 @@ dynamic deserializeParam<T>(
             return AdminUsersViewRow(data);
           case TaskFormsRow:
             return TaskFormsRow(data);
+          case TagEntitiesRow:
+            return TagEntitiesRow(data);
           case FormFieldsRow:
             return FormFieldsRow(data);
           case TaskFormFieldsViewRow:
             return TaskFormFieldsViewRow(data);
+          case TagEntitiesViewRow:
+            return TagEntitiesViewRow(data);
           case ProjectsViewRow:
             return ProjectsViewRow(data);
+          case TagsRow:
+            return TagsRow(data);
           case TaskItemsViewRow:
             return TaskItemsViewRow(data);
           case UsersRow:
             return UsersRow(data);
           case TaskItemsRow:
             return TaskItemsRow(data);
+          case ItemFormsViewRow:
+            return ItemFormsViewRow(data);
           case ItemsRow:
             return ItemsRow(data);
           default:

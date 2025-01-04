@@ -27,6 +27,12 @@ class WorkerUsersViewRow extends SupabaseDataRow {
   String? get phone => getField<String>('phone');
   set phone(String? value) => setField<String>('phone', value);
 
+  String? get bankName => getField<String>('bank_name');
+  set bankName(String? value) => setField<String>('bank_name', value);
+
+  String? get bankAccount => getField<String>('bank_account');
+  set bankAccount(String? value) => setField<String>('bank_account', value);
+
   String? get role => getField<String>('role');
   set role(String? value) => setField<String>('role', value);
 

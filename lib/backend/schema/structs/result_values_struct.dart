@@ -14,6 +14,7 @@ class ResultValuesStruct extends FFFirebaseStruct {
     String? label,
     String? value,
     int? type,
+    bool? isQcField,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _resultValueId = resultValueId,
         _resultId = resultId,
@@ -21,6 +22,7 @@ class ResultValuesStruct extends FFFirebaseStruct {
         _label = label,
         _value = value,
         _type = type,
+        _isQcField = isQcField,
         super(firestoreUtilData);
 
   // "result_value_id" field.
@@ -67,6 +69,13 @@ class ResultValuesStruct extends FFFirebaseStruct {
 
   bool hasType() => _type != null;
 
+  // "is_qc_field" field.
+  bool? _isQcField;
+  bool get isQcField => _isQcField ?? false;
+  set isQcField(bool? val) => _isQcField = val;
+
+  bool hasIsQcField() => _isQcField != null;
+
   static ResultValuesStruct fromMap(Map<String, dynamic> data) =>
       ResultValuesStruct(
         resultValueId: data['result_value_id'] as String?,
@@ -75,6 +84,7 @@ class ResultValuesStruct extends FFFirebaseStruct {
         label: data['label'] as String?,
         value: data['value'] as String?,
         type: castToType<int>(data['type']),
+        isQcField: data['is_qc_field'] as bool?,
       );
 
   static ResultValuesStruct? maybeFromMap(dynamic data) => data is Map
@@ -88,6 +98,7 @@ class ResultValuesStruct extends FFFirebaseStruct {
         'label': _label,
         'value': _value,
         'type': _type,
+        'is_qc_field': _isQcField,
       }.withoutNulls;
 
   @override
@@ -115,6 +126,10 @@ class ResultValuesStruct extends FFFirebaseStruct {
         'type': serializeParam(
           _type,
           ParamType.int,
+        ),
+        'is_qc_field': serializeParam(
+          _isQcField,
+          ParamType.bool,
         ),
       }.withoutNulls;
 
@@ -150,6 +165,11 @@ class ResultValuesStruct extends FFFirebaseStruct {
           ParamType.int,
           false,
         ),
+        isQcField: deserializeParam(
+          data['is_qc_field'],
+          ParamType.bool,
+          false,
+        ),
       );
 
   @override
@@ -163,12 +183,13 @@ class ResultValuesStruct extends FFFirebaseStruct {
         fieldId == other.fieldId &&
         label == other.label &&
         value == other.value &&
-        type == other.type;
+        type == other.type &&
+        isQcField == other.isQcField;
   }
 
   @override
   int get hashCode => const ListEquality()
-      .hash([resultValueId, resultId, fieldId, label, value, type]);
+      .hash([resultValueId, resultId, fieldId, label, value, type, isQcField]);
 }
 
 ResultValuesStruct createResultValuesStruct({
@@ -178,6 +199,7 @@ ResultValuesStruct createResultValuesStruct({
   String? label,
   String? value,
   int? type,
+  bool? isQcField,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -190,6 +212,7 @@ ResultValuesStruct createResultValuesStruct({
       label: label,
       value: value,
       type: type,
+      isQcField: isQcField,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

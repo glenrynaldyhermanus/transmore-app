@@ -27,6 +27,9 @@ class AdminUsersViewRow extends SupabaseDataRow {
   String? get phone => getField<String>('phone');
   set phone(String? value) => setField<String>('phone', value);
 
+  String? get uid => getField<String>('uid');
+  set uid(String? value) => setField<String>('uid', value);
+
   String? get role => getField<String>('role');
   set role(String? value) => setField<String>('role', value);
 

@@ -23,9 +23,6 @@ class UsersRow extends SupabaseDataRow {
   String get email => getField<String>('email')!;
   set email(String value) => setField<String>('email', value);
 
-  String get password => getField<String>('password')!;
-  set password(String value) => setField<String>('password', value);
-
   DateTime get createdAt => getField<DateTime>('created_at')!;
   set createdAt(DateTime value) => setField<DateTime>('created_at', value);
 
@@ -43,4 +40,16 @@ class UsersRow extends SupabaseDataRow {
 
   String get phone => getField<String>('phone')!;
   set phone(String value) => setField<String>('phone', value);
+
+  String get uid => getField<String>('uid')!;
+  set uid(String value) => setField<String>('uid', value);
+
+  String get gender => getField<String>('gender')!;
+  set gender(String value) => setField<String>('gender', value);
+
+  String? get bankName => getField<String>('bank_name');
+  set bankName(String? value) => setField<String>('bank_name', value);
+
+  String? get bankAccount => getField<String>('bank_account');
+  set bankAccount(String? value) => setField<String>('bank_account', value);
 }

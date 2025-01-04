@@ -560,6 +560,8 @@ class _DynamicFieldWidgetState extends State<DynamicFieldWidget> {
                     highlightColor: Colors.transparent,
                     onTap: () async {
                       final selectedMedia = await selectMedia(
+                        maxWidth: 720.00,
+                        maxHeight: 720.00,
                         includeDimensions: true,
                         includeBlurHash: true,
                         multiImage: false,

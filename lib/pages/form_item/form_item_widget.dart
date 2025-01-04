@@ -73,7 +73,10 @@ class _FormItemWidgetState extends State<FormItemWidget> {
         final formItemResultsRecord = snapshot.data!;
 
         return GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () {
+            FocusScope.of(context).unfocus();
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -110,93 +113,89 @@ class _FormItemWidgetState extends State<FormItemWidget> {
               centerTitle: false,
               elevation: 0.0,
             ),
-            body: SafeArea(
-              top: true,
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: FutureBuilder<List<ItemFormFieldsViewRow>>(
-                      future: ItemFormFieldsViewTable().queryRows(
-                        queryFn: (q) => q.eqOrNull(
-                          'item_id',
-                          widget.itemId,
-                        ),
+            body: Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: FutureBuilder<List<ItemFormFieldsViewRow>>(
+                    future: ItemFormFieldsViewTable().queryRows(
+                      queryFn: (q) => q.eqOrNull(
+                        'item_id',
+                        widget.itemId,
                       ),
-                      builder: (context, snapshot) {
-                        // Customize what your widget looks like when it's loading.
-                        if (!snapshot.hasData) {
-                          return Center(
-                            child: SizedBox(
-                              width: 50.0,
-                              height: 50.0,
-                              child: CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  FlutterFlowTheme.of(context).primary,
-                                ),
+                    ),
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: SizedBox(
+                            width: 50.0,
+                            height: 50.0,
+                            child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                FlutterFlowTheme.of(context).primary,
                               ),
                             ),
-                          );
-                        }
-                        List<ItemFormFieldsViewRow>
-                            columnItemFormFieldsViewRowList = snapshot.data!;
-
-                        return Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: List.generate(
-                              columnItemFormFieldsViewRowList.length,
-                              (columnIndex) {
-                            final columnItemFormFieldsViewRow =
-                                columnItemFormFieldsViewRowList[columnIndex];
-                            return wrapWithModel(
-                              model: _model.dynamicFieldModels.getModel(
-                                columnItemFormFieldsViewRow.id!,
-                                columnIndex,
-                              ),
-                              updateCallback: () => safeSetState(() {}),
-                              child: DynamicFieldWidget(
-                                key: Key(
-                                  'Keywyf_${columnItemFormFieldsViewRow.id!}',
-                                ),
-                                label: columnItemFormFieldsViewRow.label!,
-                                type: columnItemFormFieldsViewRow.type!,
-                                fieldId: columnItemFormFieldsViewRow.id!,
-                                task: widget.task!,
-                                result: formItemResultsRecord,
-                              ),
-                            );
-                          }).divide(const SizedBox(height: 8.0)),
+                          ),
                         );
-                      },
-                    ),
-                  ),
-                  FFButtonWidget(
-                    onPressed: () async {
-                      context.safePop();
-                    },
-                    text: 'Save',
-                    options: FFButtonOptions(
-                      width: double.infinity,
-                      height: 44.0,
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                      iconPadding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).primary,
-                      textStyle:
-                          FlutterFlowTheme.of(context).titleSmall.override(
-                                fontFamily: 'Albert Sans',
-                                color: Colors.white,
-                                letterSpacing: 0.0,
+                      }
+                      List<ItemFormFieldsViewRow>
+                          columnItemFormFieldsViewRowList = snapshot.data!;
+
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: List.generate(
+                            columnItemFormFieldsViewRowList.length,
+                            (columnIndex) {
+                          final columnItemFormFieldsViewRow =
+                              columnItemFormFieldsViewRowList[columnIndex];
+                          return wrapWithModel(
+                            model: _model.dynamicFieldModels.getModel(
+                              columnItemFormFieldsViewRow.id!,
+                              columnIndex,
+                            ),
+                            updateCallback: () => safeSetState(() {}),
+                            child: DynamicFieldWidget(
+                              key: Key(
+                                'Keywyf_${columnItemFormFieldsViewRow.id!}',
                               ),
-                      elevation: 0.0,
-                      borderRadius: BorderRadius.circular(0.0),
-                    ),
+                              label: columnItemFormFieldsViewRow.label!,
+                              type: columnItemFormFieldsViewRow.type!,
+                              fieldId: columnItemFormFieldsViewRow.id!,
+                              task: widget.task!,
+                              result: formItemResultsRecord,
+                            ),
+                          );
+                        }).divide(const SizedBox(height: 8.0)),
+                      );
+                    },
                   ),
-                ],
-              ),
+                ),
+                FFButtonWidget(
+                  onPressed: () async {
+                    context.safePop();
+                  },
+                  text: 'Save',
+                  options: FFButtonOptions(
+                    width: double.infinity,
+                    height: 44.0,
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                    iconPadding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: FlutterFlowTheme.of(context).primary,
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                          fontFamily: 'Albert Sans',
+                          color: Colors.white,
+                          letterSpacing: 0.0,
+                        ),
+                    elevation: 0.0,
+                    borderRadius: BorderRadius.circular(0.0),
+                  ),
+                ),
+              ],
             ),
           ),
         );
